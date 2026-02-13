@@ -1,0 +1,139 @@
+{
+  "nav": {
+    "features": "核心功能",
+    "execution": "執行流程",
+    "solutions": "解決方案",
+    "about": "關於我們",
+    "startFree": "立即免費試用"
+  },
+  "hero": {
+    "badge": "你的數位經紀與行銷夥伴",
+    "title": "口袋經紀",
+    "subtitle": "自動化合約 + 金流 + 免費經紀服務，讓你專注於市場拓展",
+    "cta1": "立即開始",
+    "cta2": "了解更多"
+  },
+  "painPoints": {
+    "title": "專案行政事務浪費時間？",
+    "subtitle": "我們理解您在管理專案時面臨的挑戰",
+    "point1": {
+      "title": "合約來回浪費時間",
+      "description": "合約、付款、勞報單都要逐一處理，一場活動涉及 5-10 位合作對象，請款流程複雜"
+    },
+    "point2": {
+      "title": "稅務風險與找人時間",
+      "description": "二代健保、扣繳憑單、發票開立容易出錯，市場人選多，無法快速找到符合需求及檔期的人選"
+    },
+    "point3": {
+      "title": "外部薪資計算麻煩",
+      "description": "二代健保、代扣所得計算每年不同，匯錯金額後續處理麻煩"
+    }
+  },
+  "solutions": {
+    "title": "解決痛點",
+    "subtitle": "三大核心功能，從繁雜行政中解脫",
+    "solution1": {
+      "title": "合約來回浪費時間",
+      "description": "自動化合約生成與簽署，節省大量往返時間",
+      "feature1": "線上合約自動生成",
+      "feature2": "電子簽署快速完成",
+      "feature3": "合約狀態即時追蹤"
+    },
+    "solution2": {
+      "title": "會計請款流程繁瑣",
+      "description": "整合金流系統，簡化請款與付款流程",
+      "feature1": "自動化請款通知",
+      "feature2": "多元支付方式",
+      "feature3": "即時金流追蹤"
+    },
+    "solution3": {
+      "title": "外部薪資計算麻煩",
+      "description": "自動計算薪資與稅務，確保合規無誤",
+      "feature1": "自動薪資計算",
+      "feature2": "稅務自動申報",
+      "feature3": "合規風險降低"
+    }
+  },
+  "workflow": {
+    "title": "破碎式的執行流程",
+    "subtitle": "從找人選到報稅，一站式完成",
+    "traditional": "傳統流程",
+    "pocketpro": "PocketPro 一站式完成",
+    "allAutomated": "全程由 PocketPro 自動化處理"
+  },
+  "features": {
+    "title": "核心功能",
+    "subtitle": "完整的數位經紀服務",
+    "feature1": {
+      "title": "每月提供廠商人選名單",
+      "description": "自行洽談名單（50 筆起）"
+    },
+    "feature2": {
+      "title": "自動化合約管理",
+      "description": "線上合約生成與電子簽署"
+    },
+    "feature3": {
+      "title": "金流整合",
+      "description": "自動化請款與金流追蹤"
+    },
+    "feature4": {
+      "title": "自動報稅",
+      "description": "薪資與稅務自動計算"
+    }
+  },
+  "brands": {
+    "title": "信任我們的品牌",
+    "description": "與業界領先企業合作"
+  },
+  "targetAudience": {
+    "title": "適合您的團隊嗎？",
+    "subtitle": "為行銷專業人士打造的解決方案",
+    "audience1": {
+      "title": "公關公司",
+      "description": "管理大量網紅合約與請款",
+      "benefit1": "節省 80% 行政時間",
+      "benefit2": "合約自動生成",
+      "benefit3": "金流集中管理"
+    },
+    "audience2": {
+      "title": "整合行銷代理商",
+      "description": "優化外部合作夥伴的管理流程",
+      "benefit1": "提升專案利潤",
+      "benefit2": "自動化勞報單處理",
+      "benefit3": "降低合規風險"
+    },
+    "audience3": {
+      "title": "品牌行銷團隊",
+      "description": "直接與自由接案者高效合作",
+      "benefit1": "快速找到人選",
+      "benefit2": "簡化內部報帳流程",
+      "benefit3": "即時追蹤專案進度"
+    }
+  },
+  "cta": {
+    "title": "準備簡化您的營運流程？",
+    "description": "加入數百家使用 PocketPro 簡化流程的公司",
+    "button": "立即開始"
+  },
+  "footer": {
+    "company": "公司",
+    "about": "關於我們",
+    "legal": "法律",
+    "privacy": "隱私政策",
+    "terms": "服務條款",
+    "contact": "聯繫",
+    "email": "電子郵件",
+    "phone": "電話",
+    "address": "地址",
+    "copyright": "© 2026 口袋經紀。版權所有。"
+  },
+  "contactDialog": {
+    "title": "您希望如何與我們聯繫？",
+    "phone": "直接與我們的專業顧問通話",
+    "phoneDesc": "與我們的專業顧問直接通話，獲得即時協助",
+    "phoneNumber": "02-66039370",
+    "form": "填寫表單",
+    "formDesc": "向我們發送您的信息，我們會盡快回覆",
+    "contactUs": "聯繫我們"
+  }
+}

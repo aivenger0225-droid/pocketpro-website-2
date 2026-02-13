@@ -1,0 +1,144 @@
+{
+  "nav": {
+    "features": "Features",
+    "execution": "Execution",
+    "solutions": "Solutions",
+    "about": "About Us",
+    "startFree": "Start Free Trial"
+  },
+  "hero": {
+    "badge": "Your Digital Broker & Marketing Partner",
+    "title": "PocketPro",
+    "subtitle": "Automated Contracts + Payment Processing + Free Brokerage Services, Focus on Market Expansion",
+    "cta1": "Start Now",
+    "cta2": "Learn More"
+  },
+  "painPoints": {
+    "title": "Wasting Time on Project Administration?",
+    "subtitle": "We understand the challenges you face in managing projects",
+    "point1": {
+      "title": "Chasing Signatures on Contracts & Labor Reports All Day",
+      "description": "Contracts, payments, and labor reports need to be handled one by one. A single event involves 5-10 collaborators with dozens of documents to track down"
+    },
+    "point2": {
+      "title": "Tax Risks & Time to Find Talent",
+      "description": "Second generation health insurance, withholding certificates, and invoicing are error-prone. Many market options but hard to find qualified people quickly"
+    },
+    "point3": {
+      "title": "External Payroll Calculation is Troublesome",
+      "description": "Second generation health insurance, withholding calculation changes yearly. Sending wrong amounts creates follow-up headaches with accounting"
+    }
+  },
+  "solutions": {
+    "title": "Solve Pain Points",
+    "subtitle": "Three core features to break free from complex administration",
+    "solution1": {
+      "title": "Automated Contract Generation",
+      "description": "Automated contract generation and signing saves significant back-and-forth time",
+      "feature1": "Automated online contract generation",
+      "feature2": "Quick e-signature completion",
+      "feature3": "Real-time contract status tracking"
+    },
+    "solution2": {
+      "title": "One Invoice Solves Everything",
+      "description": "Integrate payment systems to simplify invoicing and payment workflows",
+      "feature1": "Automated payment notifications",
+      "feature2": "One invoice handles the entire project",
+      "feature3": "Real-time customer service response"
+    },
+    "solution3": {
+      "title": "Outsourced Labor Services",
+      "description": "Automatically calculate payroll and taxes, ensuring compliance and accuracy",
+      "feature1": "Automatic payroll calculation",
+      "feature2": "Automatic tax filing",
+      "feature3": "Reduced compliance risk"
+    }
+  },
+  "workflow": {
+    "title": "Fragmented Execution Process",
+    "subtitle": "Complete everything in one place from finding talent to tax filing",
+    "traditional": "Traditional Process",
+    "pocketpro": "PocketPro One-Stop Solution",
+    "allAutomated": "All handled automatically by PocketPro",
+    "youFocus": "You focus on:",
+    "pocketproHandles": "PocketPro handles:"
+  },
+  "features": {
+    "title": "Core Features",
+    "subtitle": "Complete digital brokerage services",
+    "feature1": {
+      "title": "Monthly Talent List for Clients",
+      "description": "Self-negotiated talent list (50+ names)",
+      "details": "AI crawler provides 50+ uncommunicated creator lists with basic information and links, letting brands select and proactively negotiate partnerships"
+    },
+    "feature2": {
+      "title": "Contract Signing & Service Execution",
+      "description": "Automated contract generation and management",
+      "step1": "Clients fill out job requirement forms",
+      "step2": "Contractors confirm job information",
+      "step3": "Contracts auto-generated and signed/modified"
+    }
+  },
+  "targetAudience": {
+    "title": "Who Should Use PocketPro?",
+    "subtitle": "PocketPro is designed for businesses that need to efficiently manage creators and partners",
+    "audience1": {
+      "title": "Consulting & Brokerage Firms",
+      "description": "Manage multiple external collaborators, need quick contract signing and fee settlement",
+      "benefit1": "Quickly establish cooperation contracts (9A tax scope)",
+      "benefit2": "Automated fee calculation and settlement",
+      "benefit3": "Tax compliance handled automatically"
+    },
+    "audience2": {
+      "title": "Integrated Marketing Companies",
+      "description": "Execute multi-channel marketing campaigns, coordinate many creators and partners",
+      "benefit1": "Centrally manage all partners",
+      "benefit2": "Automate campaign execution workflows",
+      "benefit3": "Real-time data tracking and reporting"
+    },
+    "audience3": {
+      "title": "Brand Marketing Teams",
+      "description": "Brand internal marketing teams need to collaborate with external creators and agencies",
+      "benefit1": "Simplify creator collaboration workflows",
+      "benefit2": "Reduce administrative management costs",
+      "benefit3": "Improve collaboration efficiency and quality"
+    }
+  },
+  "brands": {
+    "title": "Trusted by Leading Brands",
+    "description": "Partnering with Taiwan's leading brands and marketing companies"
+  },
+  "cta": {
+    "title": "Ready to Boost Your Efficiency?",
+    "description": "Let PocketPro be your digital brokerage partner and focus on what truly matters",
+    "button": "Get Started Today",
+    "learnMore": "Learn More"
+  },
+  "footer": {
+    "company": "Company",
+    "about": "About Us",
+    "product": "Product",
+    "features": "Core Features",
+    "execution": "Execution Process",
+    "solutions": "Solutions",
+    "audience": "Target Audience",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "copyright": "© 2025 Guanguanshuzi Digital Co., Ltd. All rights reserved.",
+    "tagline": "Your digital broker and marketing partner, automated contracts + payment processing + free brokerage services"
+  },
+  "contactDialog": {
+    "title": "How would you like to contact us?",
+    "phone": "Call Our Professional Advisor",
+    "phoneDesc": "Speak directly with our professional advisor for instant assistance",
+    "phoneNumber": "02-66039370",
+    "form": "Fill Out Form",
+    "formDesc": "Send us your information and we'll get back to you shortly",
+    "contactUs": "Contact Us"
+  }
+}
