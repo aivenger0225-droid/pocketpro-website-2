@@ -2,11 +2,8 @@
   "version": 2,
   "builds": [
     {
-      "src": "server/_core/index.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["dist/**", "server/**"]
-      }
+      "src": "package.json",
+      "use": "@vercel/node"
     },
     {
       "src": "dist/public/**",
@@ -16,11 +13,11 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/server/_core/index.ts"
+      "dest": "/"
     },
     {
       "src": "/trpc/(.*)",
-      "dest": "/server/_core/index.ts"
+      "dest": "/"
     },
     {
       "src": "/(.*)",
