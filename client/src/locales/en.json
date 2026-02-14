@@ -115,13 +115,13 @@
     "learnMore": "Learn More"
   },
   "footer": {
+    "tagline": "PocketPro",
+    "product": "Products",
+    "execution": "How It Works",
+    "solutions": "Solutions",
+    "audience": "Who It's For",
     "company": "Company",
     "about": "About Us",
-    "product": "Product",
-    "features": "Core Features",
-    "execution": "Execution Process",
-    "solutions": "Solutions",
-    "audience": "Target Audience",
     "legal": "Legal",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
@@ -129,8 +129,7 @@
     "email": "Email",
     "phone": "Phone",
     "address": "Address",
-    "copyright": "© 2025 Guanguanshuzi Digital Co., Ltd. All rights reserved.",
-    "tagline": "Your digital broker and marketing partner, automated contracts + payment processing + free brokerage services"
+    "copyright": "© 2025 Guanguanshuzi Digital Co., Ltd. All rights reserved."
   },
   "contactDialog": {
     "title": "How would you like to contact us?",

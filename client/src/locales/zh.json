@@ -116,6 +116,11 @@
     "button": "立即開始"
   },
   "footer": {
+    "tagline": "口袋經紀",
+    "product": "產品方案",
+    "execution": "執行方式",
+    "solutions": "解決痛點",
+    "audience": "適合對象",
     "company": "公司",
     "about": "關於我們",
     "legal": "法律",

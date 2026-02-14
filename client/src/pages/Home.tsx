@@ -88,7 +88,7 @@ export default function Home() {
       )}
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-white">
+      <section id="product" className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-white">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
@@ -665,7 +665,7 @@ export default function Home() {
             <div>
               <h4 className="font-semibold mb-4">{t('footer.product')}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#features" className="hover:text-foreground transition-colors">{t('footer.features')}</a></li>
+                <li><a href="#product" className="hover:text-foreground transition-colors">{t('footer.product')}</a></li>
                 <li><a href="#workflow" className="hover:text-foreground transition-colors">{t('footer.execution')}</a></li>
                 <li><a href="#solutions" className="hover:text-foreground transition-colors">{t('footer.solutions')}</a></li>
                 <li><a href="#audience" className="hover:text-foreground transition-colors">{t('footer.audience')}</a></li>
