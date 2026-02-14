@@ -5,6 +5,7 @@ import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
 import { createContact, getContacts, getContactsStats } from "./db";
 import { notifyOwner } from "./_core/notification";
+import { createLeadInNotion } from "./notion";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -79,6 +80,42 @@ export const appRouter = router({
         throw new Error("Failed to get stats");
       }
     }),
+  }),
+  
+  lead: router({
+    submitLead: publicProcedure
+      .input(
+        z.object({
+          name: z.string().min(1),
+          phone: z.string().min(1),
+          email: z.string().email(),
+          company: z.string().min(1),
+          industry: z.string().optional(),
+          industryOther: z.string().optional(),
+          budget: z.string().optional(),
+          painPoint: z.string().optional(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        try {
+          // Save to Notion
+          await createLeadInNotion({
+            name: input.name,
+            phone: input.phone,
+            email: input.email,
+            company: input.company,
+            industry: input.industry || "未選擇",
+            industryOther: input.industryOther,
+            budget: input.budget || "未選擇",
+            painPoint: input.painPoint || "",
+          });
+          
+          return { success: true, message: "Lead submitted successfully" };
+        } catch (error) {
+          console.error("Failed to submit lead:", error);
+          throw new Error("Failed to submit lead");
+        }
+      }),
   }),
 });
 

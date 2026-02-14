@@ -8,6 +8,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { Toaster } from "@/components/ui/sonner";
 import Home from "./pages/Home";
+import LeadForm from "./pages/LeadForm";
 import NotFound from "./pages/NotFound";
 import AdminDashboard from "./pages/AdminDashboard";
 import ComponentShowcase from "./pages/ComponentShowcase";
@@ -33,6 +34,7 @@ export default function App() {
             <div className="min-h-screen bg-background text-foreground font-sans antialiased">
               <Switch>
                 <Route path="/" component={Home} />
+                <Route path="/lead" component={LeadForm} />
                 <Route path="/admin" component={AdminDashboard} />
                 <Route path="/showcase" component={ComponentShowcase} />
                 <Route component={NotFound} />
