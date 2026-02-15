@@ -6,6 +6,7 @@ import { z } from "zod";
 import { createContact, getContacts, getContactsStats } from "./db";
 import { notifyOwner } from "./_core/notification";
 import { createLeadInNotion } from "./notion";
+import { sendLeadNotification } from "./email";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -101,22 +102,21 @@ export const appRouter = router({
             // Skip Notion for now - will re-enable when properly shared
             // await createLeadInNotion({...});
 
-            // Send notification to owner
-            const notificationTitle = `🔔 新客戶！${input.company} - ${input.name}`;
-            const notificationContent = [
-              `姓名: ${input.name}`,
-              `電話: ${input.phone}`,
-              `Email: ${input.email}`,
-              `公司: ${input.company}`,
-              `產業: ${input.industry}${input.industryOther ? ` (${input.industryOther})` : ''}`,
-              `預算: ${input.budget || '未填寫'}`,
-              `痛點: ${input.painPoint || '未填寫'}`,
-            ].join('\n');
-
-            notifyOwner({
-              title: notificationTitle,
-              content: notificationContent,
-            }).catch(console.warn);
+            // Send email notification to admin
+            try {
+              await sendLeadNotification({
+                name: input.name,
+                phone: input.phone,
+                email: input.email,
+                company: input.company,
+                industry: input.industry || "未選擇",
+                industryOther: input.industryOther,
+                budget: input.budget || "未選擇",
+                painPoint: input.painPoint || "",
+              });
+            } catch (emailError) {
+              console.warn("[Lead] Email notification failed:", emailError);
+            }
           
           return { success: true, message: "Lead submitted successfully" };
         } catch (error) {
