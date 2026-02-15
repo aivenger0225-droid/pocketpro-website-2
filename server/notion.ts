@@ -4,7 +4,7 @@ const notion = new Client({
   auth: process.env.NOTION_API_KEY,
 });
 
-const DATABASE_ID = process.env.NOTION_DATABASE_ID;
+const DATABASE_ID = process.env.NOTION_DATABASE_ID || "f3b454fc-9cf4-434f-b5c1-56cf6f07c211";
 
 export async function createLeadInNotion(data: {
   name: string;
