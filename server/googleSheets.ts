@@ -14,7 +14,7 @@ const getAuth = () => {
   return auth;
 };
 
-const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID;
+const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID || "1tkGSe22_dl0FQDZhxv60M6qFJ4F5RKxE7Uzob7UJY7A";
 
 export async function appendLeadToSheet(data: {
   name: string;
