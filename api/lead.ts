@@ -1,24 +1,19 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
 
-export default async function handler(
-  request: VercelRequest,
-  response: VercelResponse
-) {
-  if (request.method !== 'POST') {
-    return response.status(405).json({ error: 'Method not allowed' });
-  }
+export const dynamic = 'force-dynamic';
 
-  const { name, phone, email, company, industry, budget, painPoint } = request.body;
-
-  // Validate required fields
-  if (!name || !phone || !email || !company) {
-    return response.status(400).json({ error: 'Missing required fields' });
-  }
-
-  const resend = new Resend(process.env.RESEND_API_KEY);
-
+export async function POST(request: Request) {
   try {
+    const body = await request.json();
+    const { name, phone, email, company, industry, budget, painPoint } = body;
+
+    // Validate required fields
+    if (!name || !phone || !email || !company) {
+      return Response.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     // Send email notification
     await resend.emails.send({
       from: 'PocketPro <onboarding@getpocketpro.com>',
@@ -36,9 +31,13 @@ export default async function handler(
       `
     });
 
-    return response.status(200).json({ success: true });
+    return Response.json({ success: true });
   } catch (error) {
     console.error('Error:', error);
-    return response.status(500).json({ error: 'Failed to send email' });
+    return Response.json({ error: 'Failed to send email' }, { status: 500 });
   }
+}
+
+export async function GET() {
+  return Response.json({ error: 'Method not allowed' }, { status: 405 });
 }
