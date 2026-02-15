@@ -36,7 +36,8 @@ export default function LeadForm() {
       toast.success("感謝您的填寫！我們會盡快與您聯繫。");
     },
     onError: (error: any) => {
-      toast.error(`提交失敗: ${error.message}`);
+      console.error('Lead submit error:', error);
+      toast.error(error.message || "提交失敗，請稍後再試");
     },
   });
 

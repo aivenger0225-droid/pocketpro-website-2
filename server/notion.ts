@@ -88,8 +88,11 @@ export async function createLeadInNotion(data: {
     });
     console.log("[Notion] Lead created:", response.id);
     return response;
-  } catch (error) {
-    console.error("[Notion] Failed to create lead:", error);
+  } catch (error: any) {
+    console.error("[Notion] Failed to create lead:", error.message || error);
+    if (error.code === 'object_not_found') {
+      throw new Error("Notion 資料庫未正確設定，請聯絡管理員");
+    }
     throw error;
   }
 }
