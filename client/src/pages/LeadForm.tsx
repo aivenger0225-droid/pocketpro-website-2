@@ -6,7 +6,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { useState } from "react";
-import { trpc } from "@/lib/trpc";
 import { Loader2, CheckCircle, ArrowRight } from "lucide-react";
 
 export default function LeadForm() {
@@ -32,16 +31,6 @@ export default function LeadForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const submitLeadMutation = trpc.lead.submitLead.useMutation({
-    onSuccess: () => { 
-      setIsSuccess(true); 
-      toast.success("感謝您的填寫！"); 
-    },
-    onError: (error: any) => { 
-      toast.error(error.message || "提交失敗"); 
-    },
-  });
-
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -57,11 +46,23 @@ export default function LeadForm() {
     if (!validate()) return;
     
     setIsSubmitting(true);
-    try
-    {
-      await submitLeadMutation.mutateAsync(formData);
+    try {
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+      
+      if (response.ok) {
+        setIsSuccess(true);
+        toast.success("感謝您的填寫！");
+      } else {
+        const data = await response.json();
+        toast.error(data.error || "提交失敗");
+      }
     } catch (error) { 
       console.error(error); 
+      toast.error("提交失敗，請稍後再試");
     } finally { 
       setIsSubmitting(false); 
     }
