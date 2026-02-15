@@ -26,9 +26,9 @@ export default function ContactMethodDialog({
   };
 
   const handleContactForm = () => {
-    // 關閉彈窗並跳轉到 Contact 頁面
+    // 關閉彈窗並跳轉到表單頁面
     onOpenChange(false);
-    setLocation("/contact");
+    setLocation("/lead");
   };
 
   return (
