@@ -7,6 +7,7 @@ import { createContact, getContacts, getContactsStats } from "./db";
 import { notifyOwner } from "./_core/notification";
 import { createLeadInNotion } from "./notion";
 import { sendLeadNotification } from "./email";
+import { appendLeadToSheet } from "./googleSheets";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -99,8 +100,21 @@ export const appRouter = router({
       )
       .mutation(async ({ input }) => {
         try {
-            // Skip Notion for now - will re-enable when properly shared
-            // await createLeadInNotion({...});
+            // Save to Google Sheets
+            try {
+              await appendLeadToSheet({
+                name: input.name,
+                phone: input.phone,
+                email: input.email,
+                company: input.company,
+                industry: input.industry || "未選擇",
+                industryOther: input.industryOther,
+                budget: input.budget || "未選擇",
+                painPoint: input.painPoint || "",
+              });
+            } catch (sheetsError) {
+              console.warn("[Lead] Google Sheets save failed:", sheetsError);
+            }
 
             // Send email notification to admin
             try {
