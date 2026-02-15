@@ -638,7 +638,7 @@ export default function Home() {
               {t('cta.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg px-12 py-6 group" onClick={handleContactClick}>
+              <Button size="lg" className="text-lg px-12 py-6 group" onClick={() => setLocation("/lead")}>
                 {t('cta.button')}
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>

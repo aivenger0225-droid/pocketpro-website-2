@@ -98,17 +98,34 @@ export const appRouter = router({
       )
       .mutation(async ({ input }) => {
         try {
-          // Save to Notion
-          await createLeadInNotion({
-            name: input.name,
-            phone: input.phone,
-            email: input.email,
-            company: input.company,
-            industry: input.industry || "未選擇",
-            industryOther: input.industryOther,
-            budget: input.budget || "未選擇",
-            painPoint: input.painPoint || "",
-          });
+            // Save to Notion
+            await createLeadInNotion({
+              name: input.name,
+              phone: input.phone,
+              email: input.email,
+              company: input.company,
+              industry: input.industry || "未選擇",
+              industryOther: input.industryOther,
+              budget: input.budget || "未選擇",
+              painPoint: input.painPoint || "",
+            });
+
+            // Send notification to owner
+            const notificationTitle = `🔔 新客戶！${input.company} - ${input.name}`;
+            const notificationContent = [
+              `姓名: ${input.name}`,
+              `電話: ${input.phone}`,
+              `Email: ${input.email}`,
+              `公司: ${input.company}`,
+              `產業: ${input.industry}${input.industryOther ? ` (${input.industryOther})` : ''}`,
+              `預算: ${input.budget || '未填寫'}`,
+              `痛點: ${input.painPoint || '未填寫'}`,
+            ].join('\n');
+
+            notifyOwner({
+              title: notificationTitle,
+              content: notificationContent,
+            }).catch(console.warn);
           
           return { success: true, message: "Lead submitted successfully" };
         } catch (error) {
