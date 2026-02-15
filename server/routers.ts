@@ -98,21 +98,8 @@ export const appRouter = router({
       )
       .mutation(async ({ input }) => {
         try {
-            // Try to save to Notion (will fail if not properly shared)
-            try {
-              await createLeadInNotion({
-                name: input.name,
-                phone: input.phone,
-                email: input.email,
-                company: input.company,
-                industry: input.industry || "未選擇",
-                industryOther: input.industryOther,
-                budget: input.budget || "未選擇",
-                painPoint: input.painPoint || "",
-              });
-            } catch (notionError) {
-              console.warn("[Lead] Notion save skipped:", notionError);
-            }
+            // Skip Notion for now - will re-enable when properly shared
+            // await createLeadInNotion({...});
 
             // Send notification to owner
             const notificationTitle = `🔔 新客戶！${input.company} - ${input.name}`;
