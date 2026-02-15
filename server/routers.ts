@@ -100,7 +100,7 @@ export const appRouter = router({
       )
       .mutation(async ({ input }) => {
         try {
-            // Save to Google Sheets
+            // Try to save to Google Sheets (may fail if permissions not set)
             try {
               await appendLeadToSheet({
                 name: input.name,
@@ -113,10 +113,10 @@ export const appRouter = router({
                 painPoint: input.painPoint || "",
               });
             } catch (sheetsError) {
-              console.warn("[Lead] Google Sheets save failed:", sheetsError);
+              console.warn("[Lead] Google Sheets save skipped:", sheetsError);
             }
 
-            // Send email notification to admin
+            // Send email notification to admin (always runs)
             try {
               await sendLeadNotification({
                 name: input.name,
