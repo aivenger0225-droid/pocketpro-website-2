@@ -81,7 +81,7 @@ async function appendToSheet(data: {
     });
 
     console.log('Sheet appended:', result.data);
-    return { success: true };
+    return { success: true, updated: result.data.updates?.updatedRows > 0 };
   } catch (error: any) {
     errorInfo = error.message || String(error);
     console.error('Sheets error:', errorInfo);
@@ -116,9 +116,9 @@ export async function POST(request: Request) {
       `
     });
 
-    await appendToSheet({ name, phone, email, company, industry, budget, painPoint });
+    const sheetResult = await appendToSheet({ name, phone, email, company, industry, budget, painPoint });
 
-    return Response.json({ success: true, sheetWritten: true });
+    return Response.json({ success: true, sheetWritten: sheetResult.updated });
   } catch (error) {
     console.error('Error:', error);
     return Response.json({ error: 'Failed to process request' }, { status: 500 });
