@@ -21,12 +21,11 @@ export default function LeadForm() {
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
-    const phoneRegex = /^09\d{2}-?\d{3}-?\d{3}$/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
+    // 簡單驗證：檢查必填欄位不為空
     if (!formData.name.trim()) newErrors.name = "請輸入姓名";
-    if (!phoneRegex.test(formData.phone)) newErrors.phone = "請輸入正確的手機號碼";
-    if (!emailRegex.test(formData.email)) newErrors.email = "請輸入正確的 Email 格式";
+    if (!formData.phone.trim()) newErrors.phone = "請輸入電話";
+    if (!formData.email.trim()) newErrors.email = "請輸入 Email";
     if (!formData.company.trim()) newErrors.company = "請輸入公司名稱";
     
     setErrors(newErrors);
