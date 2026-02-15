@@ -15,6 +15,10 @@ async function appendToSheet(data: {
   painPoint?: string;
 }) {
   try {
+    console.log('Starting Google Sheets append...');
+    console.log('CLIENT_EMAIL:', process.env.GOOGLE_CLIENT_EMAIL);
+    console.log('PRIVATE_KEY exists:', !!process.env.GOOGLE_PRIVATE_KEY);
+    
     const auth = new google.auth.GoogleAuth({
       credentials: {
         client_email: process.env.GOOGLE_CLIENT_EMAIL,
@@ -24,9 +28,12 @@ async function appendToSheet(data: {
     });
 
     const sheets = google.sheets({ version: 'v4', auth });
+    const client = await auth.getClient();
 
     const timestamp = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
 
+    console.log('Appending to sheet:', SPREADSHEET_ID);
+    
     const result = await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
       range: '工作表1!A:I',
@@ -46,10 +53,12 @@ async function appendToSheet(data: {
       },
     });
 
-    console.log('Sheet appended:', result.data);
+    console.log('Sheet appended successfully:', result.data);
     return true;
   } catch (error: any) {
-    console.error('Google Sheets error:', error.message || error);
+    console.error('Google Sheets error full:', JSON.stringify(error, null, 2));
+    console.error('Google Sheets error message:', error.message);
+    console.error('Google Sheets error code:', error.code);
     return false;
   }
 }
