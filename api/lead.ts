@@ -1,6 +1,57 @@
 import { Resend } from 'resend';
+import { google } from 'googleapis';
+
+const SPREADSHEET_ID = '1IcjgEteD0ieSoNdWHYGMzukXp5Tu3mJUbGF7kB3E7rA';
 
 export const dynamic = 'force-dynamic';
+
+async function appendToSheet(data: {
+  name: string;
+  phone: string;
+  email: string;
+  company: string;
+  industry?: string;
+  budget?: string;
+  painPoint?: string;
+}) {
+  try {
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_CLIENT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+      },
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    });
+
+    const sheets = google.sheets({ version: 'v4', auth });
+
+    const timestamp = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
+
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: SPREADSHEET_ID,
+      range: '工作表1!A:I',
+      valueInputOption: 'USER_ENTERED',
+      requestBody: {
+        values: [[
+          timestamp,
+          data.name,
+          data.phone,
+          data.email,
+          data.company,
+          data.industry || '未選擇',
+          data.budget || '未選擇',
+          data.painPoint || '未填寫',
+          '新客戶'
+        ]],
+      },
+    });
+
+    return true;
+  } catch (error) {
+    console.error('Google Sheets error:', error);
+    return false;
+  }
+}
 
 export async function POST(request: Request) {
   try {
@@ -31,10 +82,13 @@ export async function POST(request: Request) {
       `
     });
 
+    // Save to Google Sheets
+    await appendToSheet({ name, phone, email, company, industry, budget, painPoint });
+
     return Response.json({ success: true });
   } catch (error) {
     console.error('Error:', error);
-    return Response.json({ error: 'Failed to send email' }, { status: 500 });
+    return Response.json({ error: 'Failed to process request' }, { status: 500 });
   }
 }
 
