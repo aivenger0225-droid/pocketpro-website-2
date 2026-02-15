@@ -27,7 +27,7 @@ async function appendToSheet(data: {
 
     const timestamp = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
 
-    await sheets.spreadsheets.values.append({
+    const result = await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
       range: '工作表1!A:I',
       valueInputOption: 'USER_ENTERED',
@@ -46,9 +46,10 @@ async function appendToSheet(data: {
       },
     });
 
+    console.log('Sheet appended:', result.data);
     return true;
-  } catch (error) {
-    console.error('Google Sheets error:', error);
+  } catch (error: any) {
+    console.error('Google Sheets error:', error.message || error);
     return false;
   }
 }
