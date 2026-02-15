@@ -27,8 +27,31 @@ export default function LeadForm() {
     painPoint: "",
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+    
+    // 手機號碼：允許 0912345678 或 0912-345-678
+    const phoneRegex = /^09\d{2}-?\d{3}-?\d{3}$/;
+    if (!phoneRegex.test(formData.phone)) {
+      newErrors.phone = "請輸入正確的手機號碼格式";
+    }
+    
+    // Email 格式
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      newErrors.email = "請輸入正確的 Email 格式";
+    }
+    
+    if (!formData.name) newErrors.name = "姓名為必填";
+    if (!formData.company) newErrors.company = "公司名稱為必填";
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const submitLeadMutation = trpc.lead.submitLead.useMutation({
     onSuccess: () => {
@@ -59,11 +82,7 @@ export default function LeadForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!formData.name || !formData.phone || !formData.email || !formData.company) {
-      toast.error("請填寫基本聯絡資訊（姓名、電話、Email、公司名稱）");
-      return;
-    }
+    if (!validate()) return; // 驗證沒過就停止
 
     setIsSubmitting(true);
     
@@ -144,7 +163,7 @@ export default function LeadForm() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} noValidate className="space-y-6">
               {/* Name & Phone */}
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -155,8 +174,8 @@ export default function LeadForm() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="請輸入您的姓名"
-                    required
                   />
+                  {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="phone">聯絡電話 *</Label>
@@ -167,8 +186,8 @@ export default function LeadForm() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="09XX-XXX-XXX"
-                    required
                   />
+                  {errors.phone && <p className="text-sm text-red-500">{errors.phone}</p>}
                 </div>
               </div>
 
@@ -183,8 +202,8 @@ export default function LeadForm() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="your@email.com"
-                    required
                   />
+                  {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="company">公司名稱 *</Label>
@@ -194,8 +213,8 @@ export default function LeadForm() {
                     value={formData.company}
                     onChange={handleChange}
                     placeholder="請輸入公司名稱"
-                    required
                   />
+                  {errors.company && <p className="text-sm text-red-500">{errors.company}</p>}
                 </div>
               </div>
 
