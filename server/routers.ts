@@ -89,7 +89,7 @@ export const appRouter = router({
         z.object({
           name: z.string().min(1),
           phone: z.string().min(1),
-          email: z.string().email(),
+          email: z.string(),
           company: z.string().min(1),
           industry: z.string().optional(),
           industryOther: z.string().optional(),
