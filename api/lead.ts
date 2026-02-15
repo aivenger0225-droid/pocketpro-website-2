@@ -15,24 +15,28 @@ async function appendToSheet(data: {
   painPoint?: string;
 }) {
   try {
-    console.log('Starting Google Sheets append...');
+    console.log('=== Starting Google Sheets append ===');
     console.log('CLIENT_EMAIL:', process.env.GOOGLE_CLIENT_EMAIL);
-    console.log('PRIVATE_KEY exists:', !!process.env.GOOGLE_PRIVATE_KEY);
+    console.log('PRIVATE_KEY length:', process.env.GOOGLE_PRIVATE_KEY?.length);
+    console.log('SPREADSHEET_ID:', SPREADSHEET_ID);
+    
+    if (!process.env.GOOGLE_CLIENT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
+      console.error('Missing env vars!');
+      throw new Error('Missing GOOGLE_CLIENT_EMAIL or GOOGLE_PRIVATE_KEY');
+    }
     
     const auth = new google.auth.GoogleAuth({
       credentials: {
         client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
       },
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     });
 
     const sheets = google.sheets({ version: 'v4', auth });
-    const client = await auth.getClient();
+    await auth.getClient();
 
     const timestamp = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
-
-    console.log('Appending to sheet:', SPREADSHEET_ID);
     
     const result = await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
@@ -53,12 +57,14 @@ async function appendToSheet(data: {
       },
     });
 
-    console.log('Sheet appended successfully:', result.data);
+    console.log('=== Sheet appended successfully ===', result.data);
     return true;
   } catch (error: any) {
-    console.error('Google Sheets error full:', JSON.stringify(error, null, 2));
-    console.error('Google Sheets error message:', error.message);
-    console.error('Google Sheets error code:', error.code);
+    console.error('=== Google Sheets error ===');
+    console.error('Error:', error.message || error);
+    if (error.response) {
+      console.error('Response:', error.response.data);
+    }
     return false;
   }
 }
