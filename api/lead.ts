@@ -81,7 +81,7 @@ async function appendToSheet(data: {
     });
 
     console.log('Sheet appended:', result.data);
-    return { success: true, updated: result.data.updates?.updatedRows > 0 };
+    return { success: true, updated: !!(result.data.updates?.updatedRows && result.data.updates.updatedRows > 0) };
   } catch (error: any) {
     errorInfo = error.message || String(error);
     console.error('Sheets error:', errorInfo);
