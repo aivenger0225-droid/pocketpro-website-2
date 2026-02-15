@@ -21,7 +21,7 @@ export async function sendLeadNotification(data: {
 
   try {
     const data_ = await resend.emails.send({
-      from: "PocketPro <onboarding@resend.dev>",
+      from: "PocketPro <onboarding@getpocketpro.com>",
       to: ADMIN_EMAIL,
       subject: `🔔 新客戶！${data.company} - ${data.name}`,
       html: `
