@@ -3,6 +3,39 @@ import { google } from 'googleapis';
 
 const SPREADSHEET_ID = '1IcjgEteD0ieSoNdWHYGMzukXp5Tu3mJUbGF7kB3E7rA';
 
+// Hardcoded for testing - replace env vars later
+const SERVICE_ACCOUNT = {
+  client_email: process.env.GOOGLE_CLIENT_EMAIL || 'pocketpro-sheet@project-d61f7947-3913-4800-b08.iam.gserviceaccount.com',
+  private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n') || `-----BEGIN PRIVATE KEY-----
+MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCv44ONg1vbtDZy
+Z0/nfKztYIpGxIgfvzQCkWXErg0vYXhMOYcK7sLFigp53J5An5dClGTASxXWMZlw
+96GoyQib0RFHTJBX1nmUZJfinayf82+UDSItg3YkvgXynPX/9fOr51of+AaG5jWH
+0EO3Y7/lnEr/RIcBih4UW65Sj7sBwIWRN3OMLIMguEnKTNLU/5pI4s46ezVXjIgS
+q0m1x/JxgD8WsIQ+Ak1RKoIq4b9xKOTtmX4JRKyckz+K6Hjtn00uHHxWysGPo8T1
+dQHiEXpIjS34R9E77Bh9YluTgAKBOARaTmQeLGpiPC4s/TJng5TGmlOmAYdrAMS+
+gHHQZEV1AgMBAAECggEAGTEKVfni7bA9fhw67wpF0Efb9i/O2VEu11FQ1J8jJ06c
+BrrUkyXIQre3MWX+Sn4xEWmkloAKlB+NfQcSodSNRZfnlCEsqVAAINdZg60WnOAm
+cnuBEii6gp+uxWVivHLTICNmHp8M/EQ7lYSoNjt0sCO3ACGl/nv0O/E3of6RB7p4
++LkEG2xCMpYJR73eAAzFOU0pFeBYGEElDgWzoZO4JLI/DzfrFEsI1jI6mRkBAmEo
+tbZYPGOqeKVVM7JYxFNSqIB3Z370pp8HK2Ctg+o/xtD3KuaEcR8Q3Se+GWeTZU13
+i5CPq8mPzELYd1IPISz+0FKvCEI/mC0ExmNRGMUL4QKBgQDZ1nd6cYa6jfVWPc31
+z5nx85R/uS8qI2DDLRvKBfsK1hy4k2MJ1e+kGbENfPri4Al31+ogT7cqMmxgNpHH
+zoDAtsipy9Gz6BNk//qeUiBgWkNGLms/hzKx98QmLQlIln344MdYDMs77zWfW9o9
+tFcq2ZTQeGUwSDtBDqIWwRZUhQKBgQDOs7o1nIM9GjGkscKocMqoC3585VLO7WP1
+B4W3ltX7DhpYLTqfzlSonELD1LV0CCbv/Go3X07y0AzGrHUBzf4iirAhlOd1Ruqd
+LRsgYsUorxASsWR50xDBySTBCPrlzYVX7y5nHCjqG4P+rGmYRzkDqAG5suodKy6n
+at1mzG04MQKBgD6sBE3W8aMkimwYdfP9mVXR9WxVs+sUqJcemDskQ1iXx0WXKcw/
+n6V/ur+dsHSrbi3rkbFgHdtnDGUV7hUlJUfMjqjDOf7fiwzo1IrOKABwl6BOZI6v
+b/dhyC4PkPcwTOfYi6GadLI2nR/PBlfwVY+/b6AWs04TyfBqrFmNjcYdAoGAAxAA
+o0i1XRNlRuZnVu2M4x6AekM/jddQktHQtl6ivvx/gWzyIGoDMRhXmOUu5xAz23xm
+6nkcB1bzyYHGngc6S7K4V1cIcuFhGoEPlNRBzY+CcnR0Y6Wv6t8bD00dwofgAOSH
+UHnHVWig9QYC7oGno5k6pVC0TUhVgZ+AtkQzHhECgYA+C91PBv6MxJ6A/TSUjbWh
+EECnzio31464VQJn2zLNSeQp8kdfkKQ+jaBBF8c6to8HYTpEuBB6Zib4xp49ZdhC
+9s4hIrq8oO51SQmYxRbWgcUrnEI6b+dI/QQjHxHVsOkC5iKsit25iFqNP7mA0Bfl
+EaaIeswNF+nhhoBbOpLeeQ==
+-----END PRIVATE KEY-----`
+};
+
 export const dynamic = 'force-dynamic';
 
 async function appendToSheet(data: {
@@ -15,21 +48,10 @@ async function appendToSheet(data: {
   painPoint?: string;
 }) {
   try {
-    console.log('=== Starting Google Sheets append ===');
-    console.log('CLIENT_EMAIL:', process.env.GOOGLE_CLIENT_EMAIL);
-    console.log('PRIVATE_KEY length:', process.env.GOOGLE_PRIVATE_KEY?.length);
-    console.log('SPREADSHEET_ID:', SPREADSHEET_ID);
-    
-    if (!process.env.GOOGLE_CLIENT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
-      console.error('Missing env vars!');
-      throw new Error('Missing GOOGLE_CLIENT_EMAIL or GOOGLE_PRIVATE_KEY');
-    }
+    console.log('Using service account:', SERVICE_ACCOUNT.client_email);
     
     const auth = new google.auth.GoogleAuth({
-      credentials: {
-        client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-      },
+      credentials: SERVICE_ACCOUNT,
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     });
 
@@ -57,14 +79,10 @@ async function appendToSheet(data: {
       },
     });
 
-    console.log('=== Sheet appended successfully ===', result.data);
+    console.log('Sheet appended:', result.data);
     return true;
   } catch (error: any) {
-    console.error('=== Google Sheets error ===');
-    console.error('Error:', error.message || error);
-    if (error.response) {
-      console.error('Response:', error.response.data);
-    }
+    console.error('Sheets error:', error.message);
     return false;
   }
 }
@@ -74,14 +92,12 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, phone, email, company, industry, budget, painPoint } = body;
 
-    // Validate required fields
     if (!name || !phone || !email || !company) {
       return Response.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    // Send email notification
     await resend.emails.send({
       from: 'PocketPro <onboarding@getpocketpro.com>',
       to: 'jump@pocketpro.tw',
@@ -98,7 +114,6 @@ export async function POST(request: Request) {
       `
     });
 
-    // Save to Google Sheets
     await appendToSheet({ name, phone, email, company, industry, budget, painPoint });
 
     return Response.json({ success: true });
